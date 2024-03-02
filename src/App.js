@@ -1,9 +1,10 @@
 import "./App.css";
+import { Registration } from "./components/registration";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">heellloo</header>
+      <Registration />
     </div>
   );
 }
