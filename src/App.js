@@ -1,10 +1,13 @@
-import { Login } from "./components/login";
+import { ThemeProvider } from "@mui/styles";
+
+import theme from "./components/theme";
+import AppRoutes from "./routers";
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <ThemeProvider theme={theme}>
+      <AppRoutes />
+    </ThemeProvider>
   );
 }
 
