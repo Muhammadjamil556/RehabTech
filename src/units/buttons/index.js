@@ -14,7 +14,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
   fontSize: 12,
   textAlign: "center",
   fontWeight: 700,
-  fontsize: 21,
+  fontsize: 18,
 
   "&.MuiButton-outlined": {
     color: "#000",
@@ -26,15 +26,15 @@ const CustomButton = styled(Button)(({ theme }) => ({
     },
   },
 
-  // "&.MuiButton-contained": {
-  //   color: theme.palette.common.blue,
-  //   border: "1px solid" + theme.palette.common.blue,
-  //   backgroundColor: theme.palette.common.blue,
-  //   borderRadius: 25,
-  //   "&:hover": {
-  //     backgroundColor: alpha(theme.palette.primary, 0.9),
-  //   },
-  // },
+  "&.MuiButton-contained": {
+    color: "#fff",
+    border: "1px solid #fff",
+    backgroundColor: "#174468",
+    borderRadius: 25,
+    "&:hover": {
+      backgroundColor: alpha("#365B6D", 0.9),
+    },
+  },
 }));
 
 export default CustomButton;
