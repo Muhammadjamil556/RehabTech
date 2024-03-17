@@ -4,6 +4,7 @@ import image1 from "../../assets/physiotherapy-and-rehabilitation-background-vec
 import { makeStyles } from "@mui/styles";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const classes = useStyles();
@@ -40,7 +41,6 @@ export const Login = () => {
                       className={classes.inputField}
                     />
                   </Box>
-
                   <Box
                     sx={{
                       display: "flex",
@@ -71,16 +71,12 @@ export const Login = () => {
                       Login
                     </Button>
                   </Box>
-
                   <Box sx={{ margin: "50px 0px", textAlign: "center" }}>
                     <Typography variant="body2">
                       Don't have a account?
-                      <a
-                        href="https://www.w3schools.com"
-                        className={classes.aTag}
-                      >
-                        Sign in now{" "}
-                      </a>
+                      <Link to="/signup" className={classes.aTag}>
+                        Sign up now{" "}
+                      </Link>
                     </Typography>
                   </Box>
                 </div>
@@ -141,7 +137,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0px 3px 3px 0px",
     objectFit: "cover",
   },
-
   rightModule: {
     overflow: " hidden",
     flex: 2,
@@ -160,7 +155,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px",
     marginBottom: "20px",
   },
-
   inputField: {
     outline: 0,
     border: 0,

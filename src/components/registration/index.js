@@ -4,6 +4,7 @@ import image1 from "../../assets/physiotherapy-and-rehabilitation-background-vec
 import { makeStyles } from "@mui/styles";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 export const Registration = () => {
   const classes = useStyles();
@@ -83,13 +84,14 @@ export const Registration = () => {
 
                   <Box sx={{ margin: "50px 0px", textAlign: "center" }}>
                     <Typography variant="body2">
-                      Want to register with gmail?
-                      <a
+                      Already have an account?
+                      <Link
+                        to="/login"
                         href="https://www.w3schools.com"
                         className={classes.aTag}
                       >
                         Sign in now{" "}
-                      </a>
+                      </Link>
                     </Typography>
                   </Box>
                 </div>
