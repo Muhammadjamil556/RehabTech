@@ -4,16 +4,10 @@ import { makeStyles } from "@mui/styles";
 import React from "react";
 
 import { useNavigate } from "react-router";
-
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CustomButton from "../../units/buttons";
 
-export default function PropertiesCard({
-  id,
-  title,
-
-  image,
-  price,
-}) {
+export default function PropertiesCard({ id, title, image, price }) {
   const classes = useStyles();
   // const navigate = useNavigate();
 
@@ -69,7 +63,8 @@ export default function PropertiesCard({
             className="cartBtn"
             // onClick={() => handleNavigation(id)}
           >
-            Add to cart
+            Add cart
+            <AddShoppingCartIcon />
           </CustomButton>
           <CustomButton
             variant="contained"
@@ -124,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     "& .cartBtn": {
       marginTop: 10,
-      width: 150,
+      width: 160,
       textTransform: "capitalize",
       fontWeight: 600,
       fontSize: 16,
