@@ -20,7 +20,7 @@ export default function Header() {
         </Link>
       </div>
 
-      <div className={classes.linkcont}>
+      <div className={classes.linkCont}>
         <Link to="/Physiotherapist-Consultation" className={classes.links}>
           Physiotherapist Consultation
         </Link>
@@ -39,10 +39,12 @@ export default function Header() {
 
         <span className={classes.links}></span>
       </div>
-      <div className={classes.btncont}>
-        <CustomButton variant="outlined">
-          {/* onClick={openLoginModal} */} Register/Login
-        </CustomButton>
+      <div className={classes.btnCont}>
+        <Link to="/login" className={classes.links}>
+          <CustomButton variant="outlined">
+            {/* onClick={openLoginModal} */} Register/Login
+          </CustomButton>
+        </Link>
       </div>
     </div>
   );
@@ -57,10 +59,10 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     padding: "0px 29px 0px 69px",
     backgroundColor: theme.palette.background.footer,
+    fontFamily: "Roboto,Helvetica,Arial,sans-serif",
     [theme.breakpoints.down("md")]: {
       gridTemplateColumns: "1fr 6fr  5fr",
     },
-
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       gridTemplateColumns: "1fr",
@@ -72,13 +74,15 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     textDecoration: "none",
     cursor: "pointer",
+    padding: "5px",
   },
   logo: {
     width: "100px",
     height: "90px",
   },
-  linkcont: {
+  linkCont: {
     display: "flex",
+
     justifyContent: "space-between",
     [theme.breakpoints.down("md")]: {
       display: "none",
@@ -89,10 +93,9 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
   },
-  btncont: {
+  btnCont: {
     display: "flex",
     justifyContent: "flex-end",
-
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },

@@ -7,9 +7,7 @@ const Medicine = () => {
   const classes = useStyles();
   return (
     <div>
-      {" "}
       <Box className={classes.cardContainer}>
-        {" "}
         <CardsMape />
       </Box>
     </div>
