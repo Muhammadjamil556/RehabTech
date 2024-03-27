@@ -18,7 +18,7 @@ export default function Footer() {
   return (
     <div className={classes.container}>
       <div className={classes.main}>
-        <Box className={classes.footerdata1}>
+        <Box className={classes.footerData1}>
           <img className="logo" src={logo} alt="logo" />
           <Box style={{ paddingRight: 10 }}>
             <Typography>
@@ -62,10 +62,18 @@ export default function Footer() {
             </Typography>
           </Box>
           <Box className={classes.linkSection}>
-            <Typography className="links">Exercise</Typography>
-            <Typography className="links">Consultation</Typography>
-            <Typography className="links">posture correction</Typography>
-            <Typography className="links">E pharmacy</Typography>
+            <Link to="/Exercises" className={classes.links}>
+              <Typography className="links">Exercise</Typography>{" "}
+            </Link>
+            <Link to="/Physiotherapist-Consultation" className={classes.links}>
+              <Typography className="links">Consultation</Typography>
+            </Link>
+            <Link to="/Pose-detection" className={classes.links}>
+              <Typography className="links">posture correction</Typography>
+            </Link>
+            <Link to="/Medicine-store" className={classes.links}>
+              <Typography className="links">E pharmacy</Typography>{" "}
+            </Link>
           </Box>
         </Box>
         <Box className={classes.footerData2}>
@@ -121,9 +129,7 @@ export default function Footer() {
           </Box>
         </Box>
       </div>
-
       <Box>
-        {" "}
         <Divider
           sx={{
             margin: "0px 60px 0px 60px ",
@@ -176,7 +182,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  footerdata1: {
+  footerData1: {
     display: "flex",
     rowGap: 10,
     flexDirection: "column",
@@ -219,13 +225,10 @@ const useStyles = makeStyles((theme) => ({
       "&:hover": { cursor: "pointer" },
     },
   },
-
   secAddress: { display: "flex", columnGap: 10, paddingBottom: 5 },
-
   endSection: {
     color: theme.palette.common.white,
     padding: " 20px 30px 30px 70px",
-
     display: "flex",
     justifyContent: "space-between",
     flexWrap: "wrap",

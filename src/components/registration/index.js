@@ -82,7 +82,7 @@ export const Registration = () => {
                     </Button>
                   </Box>
 
-                  <Box sx={{ margin: "50px 0px", textAlign: "center" }}>
+                  <Box sx={{ margin: "50px 0px 0px 0px", textAlign: "center" }}>
                     <Typography variant="body2">
                       Already have an account?
                       <Link
@@ -93,6 +93,21 @@ export const Registration = () => {
                         Sign in now{" "}
                       </Link>
                     </Typography>
+                  </Box>
+
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    sx={{ margin: "20px 0px" }}
+                  >
+                    <Link to="/home" className={classes.aTag}>
+                      <Button
+                        sx={{ background: "grey", margin: "10px 0px" }}
+                        variant="contained"
+                      >
+                        cancel{" "}
+                      </Button>
+                    </Link>
                   </Box>
                 </div>
               </form>

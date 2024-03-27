@@ -70,8 +70,18 @@ export const Login = () => {
                     >
                       Login
                     </Button>
+                    <Box sx={{ padding: "0px 6px" }}>
+                      <Link to="/home" className={classes.aTag}>
+                        <Button
+                          sx={{ background: "grey", margin: "10px 0px" }}
+                          variant="contained"
+                        >
+                          cancel{" "}
+                        </Button>
+                      </Link>
+                    </Box>
                   </Box>
-                  <Box sx={{ margin: "50px 0px", textAlign: "center" }}>
+                  <Box sx={{ margin: "0px 0px", textAlign: "center" }}>
                     <Typography variant="body2">
                       Don't have a account?
                       <Link to="/signup" className={classes.aTag}>
