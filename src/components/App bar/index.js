@@ -3,6 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Screenshot from 2024-03-14 15-25-31.png";
 import CustomButton from "../../units/buttons";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Badge, IconButton, MenuItem } from "@mui/material";
+
 // import { toggleModal } from "../../redux/login/login.slicer";
 // import { useDispatch } from "react-redux";
 
@@ -36,14 +39,19 @@ export default function Header() {
         <Link to="/News" className={classes.links}>
           News
         </Link>
-
-        <span className={classes.links}></span>
       </div>
       <div className={classes.btnCont}>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          sx={{ width: "50px", color: (theme) => theme.palette.common.white }}
+        >
+          <Badge badgeContent={17} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
         <Link to="/login" className={classes.links}>
-          <CustomButton variant="outlined">
-            {/* onClick={openLoginModal} */} Register/Login
-          </CustomButton>
+          <CustomButton variant="outlined">Register/Login</CustomButton>
         </Link>
       </div>
     </div>
@@ -82,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
   linkCont: {
     display: "flex",
-
+    alignItems: "center",
     justifyContent: "space-between",
     [theme.breakpoints.down("md")]: {
       display: "none",

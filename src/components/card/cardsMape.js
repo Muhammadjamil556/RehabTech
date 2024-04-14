@@ -1,14 +1,33 @@
 import React from "react";
-import { data } from "./data";
 import PropertiesCard from ".";
 import { makeStyles } from "@mui/styles";
+import axios from "../../axios";
+import { useState, useEffect } from "react";
 const CardsMape = () => {
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const [isError, setError] = useState([]);
+
+  const getApiData = async () => {
+    try {
+      const res = await axios.get("/api/v1/all-medicines");
+      setData(res.data.response);
+    } catch (error) {
+      setError(error);
+    }
+  };
+  useEffect(() => {
+    getApiData();
+  }, []);
+
   return (
-    <div className={classes.container}>
-      {data.map((item, i) => (
-        <PropertiesCard {...item} />
-      ))}
+    <div>
+      {isError !== "" && <h1>{isError}</h1>}
+      <div className={classes.container}>
+        {data.map((item, i) => (
+          <PropertiesCard {...item} />
+        ))}
+      </div>
     </div>
   );
 };
