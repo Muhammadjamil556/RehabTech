@@ -5,6 +5,7 @@ import logo from "../../assets/Screenshot from 2024-03-14 15-25-31.png";
 import CustomButton from "../../units/buttons";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Badge, IconButton, MenuItem } from "@mui/material";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // import { toggleModal } from "../../redux/login/login.slicer";
 // import { useDispatch } from "react-redux";
@@ -14,6 +15,8 @@ export default function Header() {
   // const dispatch = useDispatch();
   // const openLoginModal = () => {
   //   dispatch(toggleModal(true));
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+
   // };
   return (
     <div className={classes.headerMain}>
@@ -50,9 +53,30 @@ export default function Header() {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <Link to="/login" className={classes.links}>
-          <CustomButton variant="outlined">Register/Login</CustomButton>
-        </Link>
+
+        {isAuthenticated && (
+          <div>
+            <img
+              className={classes.avatar}
+              src={user.picture}
+              alt={user.name}
+            />
+          </div>
+        )}
+        {isAuthenticated ? (
+          <CustomButton
+            variant="contained"
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          >
+            Log Out
+          </CustomButton>
+        ) : (
+          <CustomButton variant="contained" onClick={() => loginWithRedirect()}>
+            Log In
+          </CustomButton>
+        )}
       </div>
     </div>
   );
@@ -61,7 +85,7 @@ export default function Header() {
 const useStyles = makeStyles((theme) => ({
   headerMain: {
     display: "grid",
-    gridTemplateColumns: "5fr 6fr 1fr auto",
+    gridTemplateColumns: "5fr 6fr 3fr auto",
     alignItems: "center",
     columnGap: "40px",
     position: "sticky",
@@ -101,9 +125,10 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
   },
+  avatar: { width: 40, height: 40, borderRadius: "50%" },
   btnCont: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "space-around",
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },

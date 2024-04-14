@@ -36,7 +36,7 @@ export default function PropertiesCard({ id, name, image, price }) {
             />
           </Box>
           <Box className={classes.priceBox}>
-            <Typography> US${Math.floor(Math.random() * 100 + 1)}</Typography>
+            <Typography> PKR{Math.floor(Math.random() * 100 + 1)}</Typography>
           </Box>
         </Box>
         <Box>
