@@ -1,13 +1,11 @@
-import { Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-
 import React from "react";
 
-import { useNavigate } from "react-router";
+import { Box, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CustomButton from "../../units/buttons";
 
-export default function PropertiesCard({ id, title, image, price }) {
+export default function PropertiesCard({ id, name, imageURL, price }) {
   const classes = useStyles();
   // const navigate = useNavigate();
 
@@ -33,12 +31,12 @@ export default function PropertiesCard({ id, title, image, price }) {
             <img
               className={classes.imageHouse}
               // src={imageUrls[0]}
-              src={image}
+              src={imageURL}
               alt="medicineImage"
             />
           </Box>
           <Box className={classes.priceBox}>
-            <Typography> US${price}</Typography>
+            <Typography> PKR{Math.floor(Math.random() * 100 + 1)}</Typography>
           </Box>
         </Box>
         <Box>
@@ -53,7 +51,7 @@ export default function PropertiesCard({ id, title, image, price }) {
               textOverflow: "ellipsis",
             }}
           >
-            {title}
+            {name}
           </Typography>
         </Box>
 

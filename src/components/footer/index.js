@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Box, Divider, Typography } from "@mui/material";
-import logo from "../../assets/Screenshot from 2024-03-14 15-25-31.png";
+import logo from "../../assets/phsiotherapy.jpg";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
