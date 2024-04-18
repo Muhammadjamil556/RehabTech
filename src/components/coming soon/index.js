@@ -62,7 +62,7 @@ function ComingSoon() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [launchDate]);
 
   return (
     <div className={classes.app}>

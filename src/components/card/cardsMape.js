@@ -12,6 +12,7 @@ const CardsMape = () => {
     try {
       const res = await axios.get("/api/v1/all-medicines");
       setData(res.data.response);
+      console.log(res.data.response);
     } catch (error) {
       setError(error);
     }
@@ -24,7 +25,7 @@ const CardsMape = () => {
     <div>
       {isError !== "" && <h1>{isError}</h1>}
       <div className={classes.container}>
-        {data.map((item, i) => (
+        {data.map((item, index) => (
           <PropertiesCard {...item} />
         ))}
       </div>
