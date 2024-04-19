@@ -1,33 +1,35 @@
 import React from "react";
-import PropertiesCard from ".";
+import PropertiesCard from "./index";
 import { makeStyles } from "@mui/styles";
-import axios from "../../axios";
-import { useState, useEffect } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getData } from "../../feature/actions";
+import { Box } from "@mui/material";
+
 const CardsMape = () => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
-  const [isError, setError] = useState([]);
 
-  const getApiData = async () => {
-    try {
-      const res = await axios.get("/api/v1/all-medicines");
-      setData(res.data.response);
-      console.log(res.data.response);
-    } catch (error) {
-      setError(error);
-    }
-  };
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
   useEffect(() => {
-    getApiData();
-  }, []);
+    dispatch(getData());
+  }, [dispatch]);
+
+  if (state.product.isLoading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <div>
-      {isError !== "" && <h1>{isError}</h1>}
       <div className={classes.container}>
-        {data.map((item, index) => (
-          <PropertiesCard {...item} />
-        ))}
+        {state.product.data &&
+          state.product.data.map((item, index) => <PropertiesCard {...item} />)}
       </div>
     </div>
   );

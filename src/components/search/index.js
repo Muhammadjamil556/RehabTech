@@ -15,9 +15,10 @@ const StaticSearchBar = () => {
       component="form"
       sx={{
         display: "flex",
+        justifyContent: "flex-start",
         alignItems: "center",
         maxWidth: "400px",
-        margin: "auto",
+        margin: "20px",
         borderRadius: "24px",
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
         "&:hover": {
