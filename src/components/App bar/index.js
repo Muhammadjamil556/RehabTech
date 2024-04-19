@@ -77,18 +77,23 @@ export default function Header() {
         </Link>
       </div>
       {isAuthenticated && (
-        <Box>
-          <IconButton
-            onClick={handleClickNotifications("top-end")} // Pass the placement for notifications
-            size="large"
-            aria-label="show 17 new notifications"
-            sx={{ width: "50px", color: (theme) => theme.palette.common.white }}
-          >
-            <Badge badgeContent={1} color="error">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Box>
+        <>
+          <Box>
+            <IconButton
+              onClick={handleClickNotifications("top-end")} // Pass the placement for notifications
+              size="large"
+              aria-label="show 17 new notifications"
+              sx={{
+                width: "50px",
+                color: (theme) => theme.palette.common.white,
+              }}
+            >
+              <Badge badgeContent={1} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Box>
+        </>
       )}
       {!isAuthenticated && (
         <CustomButton variant="contained" onClick={() => loginWithRedirect()}>
