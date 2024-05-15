@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputBase, IconButton, Paper } from "@mui/material";
+import { setInput } from "../../feature/productSlicer";
+
+import { useDispatch, useSelector } from "react-redux";
 
 const StaticSearchBar = () => {
   const [searchText, setSearchText] = useState("");
+  const dispatch = useDispatch();
+  // const filteredProductDetails = useSelector(
+  //   (state) => state.product.filteredProductDetails
+  // );
 
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
-    // You can add your search logic here
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setSearchText(value);
+    dispatch(setInput(value)); // Dispatch setInput action with input value
   };
 
   return (
@@ -32,7 +40,7 @@ const StaticSearchBar = () => {
       <InputBase
         placeholder="Search..."
         value={searchText}
-        onChange={handleSearchChange}
+        onChange={handleChange}
         fullWidth
         sx={{
           flexGrow: 1,

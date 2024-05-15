@@ -4,15 +4,26 @@ import { getData } from "./actions";
 const productSlicer = createSlice({
   name: "product",
   initialState: {
+    productDetails: [],
     isLoading: false,
     data: null,
     isError: false,
   },
-  reducers: {},
+  reducers: {
+    setInput: (state, action) => {
+      const data = state.productDetails.filter(
+        (product) =>
+          product.name &&
+          product.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      state.data = data;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getData.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
+      state.productDetails = action.payload;
     });
     builder.addCase(getData.pending, (state, action) => {
       state.isLoading = true;
@@ -23,5 +34,5 @@ const productSlicer = createSlice({
     });
   },
 });
-
+export const { setInput } = productSlicer.actions;
 export default productSlicer.reducer;

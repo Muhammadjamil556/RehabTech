@@ -12,6 +12,7 @@ const CardsMape = () => {
 
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
+  console.log(state, "state");
 
   useEffect(() => {
     dispatch(getData());

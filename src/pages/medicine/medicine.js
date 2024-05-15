@@ -4,6 +4,9 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import StaticSearchBar from "../../components/search";
 import backImage from "../../assets/e78bfb4b1e5c03e23238bcb45de6c008.jpg";
+import { Badge } from "@mui/material";
+
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Medicine = () => {
   const classes = useStyles();
@@ -18,8 +21,19 @@ const Medicine = () => {
         </Box>
       </Box>
       <Box className={classes.cardContainer}>
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <StaticSearchBar />
+          {/* <Link to="/cart"> */}
+          <Badge badgeContent={1}>
+            <ShoppingCartIcon fontSize="large" className={classes.iconCart} />
+          </Badge>
+          {/* </Link> */}
         </Box>
         <CardsMape />
       </Box>

@@ -4,9 +4,22 @@ import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CustomButton from "../../units/buttons";
+import addNotification from "react-push-notification";
 
 export default function PropertiesCard({ id, name, imageURL, price }) {
   const classes = useStyles();
+
+  const clickToNotify = () => {
+    addNotification({
+      title: "shoping cart items updates",
+      subtitle: "",
+      message: "successfully added to cart ",
+      theme: "white",
+      duration: 4000,
+      native: true,
+      position: "bottom-right", // when using native, your OS will handle theming.
+    });
+  };
   // const navigate = useNavigate();
 
   // const handleNavigation = (id) => {
@@ -59,16 +72,13 @@ export default function PropertiesCard({ id, name, imageURL, price }) {
           <CustomButton
             variant="contained"
             className="cartBtn"
+            onClick={clickToNotify}
             // onClick={() => handleNavigation(id)}
           >
             Add cart
             <AddShoppingCartIcon />
           </CustomButton>
-          <CustomButton
-            variant="contained"
-            className="btn"
-            // onClick={() => handleNavigation(id)}
-          >
+          <CustomButton variant="contained" className="btn">
             Details
           </CustomButton>
         </div>
