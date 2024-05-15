@@ -5,20 +5,18 @@ const productSlicer = createSlice({
   name: "product",
   initialState: {
     productDetails: [],
-    filteredProductDetails: [],
     isLoading: false,
     data: null,
     isError: false,
   },
   reducers: {
     setInput: (state, action) => {
-      const filteredProducts = state.productDetails.filter(
+      const data = state.productDetails.filter(
         (product) =>
-          product.title &&
-          product.title.toLowerCase().includes(action.payload.toLowerCase())
+          product.name &&
+          product.name.toLowerCase().includes(action.payload.toLowerCase())
       );
-      state.filteredProductDetails = filteredProducts;
-      console.log(state.filteredProductDetails, "asdaksjd");
+      state.data = data;
     },
   },
   extraReducers: (builder) => {

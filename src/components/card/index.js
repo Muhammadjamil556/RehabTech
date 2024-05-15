@@ -16,8 +16,8 @@ export default function PropertiesCard({ id, name, imageURL, price }) {
       message: "successfully added to cart ",
       theme: "white",
       duration: 4000,
-      icon: { imageURL },
-      native: true, // when using native, your OS will handle theming.
+      native: true,
+      position: "bottom-right", // when using native, your OS will handle theming.
     });
   };
   // const navigate = useNavigate();
@@ -72,16 +72,13 @@ export default function PropertiesCard({ id, name, imageURL, price }) {
           <CustomButton
             variant="contained"
             className="cartBtn"
+            onClick={clickToNotify}
             // onClick={() => handleNavigation(id)}
           >
             Add cart
             <AddShoppingCartIcon />
           </CustomButton>
-          <CustomButton
-            variant="contained"
-            className="btn"
-            onClick={clickToNotify}
-          >
+          <CustomButton variant="contained" className="btn">
             Details
           </CustomButton>
         </div>
