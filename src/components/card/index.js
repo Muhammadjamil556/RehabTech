@@ -5,6 +5,7 @@ import { makeStyles } from "@mui/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CustomButton from "../../units/buttons";
 import addNotification from "react-push-notification";
+import { Link } from "react-router-dom";
 
 export default function PropertiesCard({ id, name, imageURL, price }) {
   const classes = useStyles();
@@ -78,9 +79,11 @@ export default function PropertiesCard({ id, name, imageURL, price }) {
             Add cart
             <AddShoppingCartIcon />
           </CustomButton>
-          <CustomButton variant="contained" className="btn">
-            Details
-          </CustomButton>
+          <Link to="/MedicineDetails" className={classes.links}>
+            <CustomButton variant="contained" className="btn">
+              Details
+            </CustomButton>
+          </Link>
         </div>
       </Box>
     </div>

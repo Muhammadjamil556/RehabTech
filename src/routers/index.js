@@ -38,7 +38,7 @@ import { Login } from "../components/login";
 import { Registration } from "../components/registration";
 import Medicine from "../pages/medicine/medicine";
 import ComingSoon from "../components/coming soon";
-import MedicineDetailPage from "../components/medicineDetails/index"; // Import MedicineDetailPage component
+import MedicineDetails from "../components/medicineDetails/medicineDetails"; // Import MedicineDetailPage component
 
 const AppRoutes = () => {
   return (
@@ -49,7 +49,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/medicine-store" element={<Medicine />} />
-        <Route path="/medicine/:id" element={<MedicineDetailPage />} />{" "}
+        <Route path="/MedicineDetails" element={<MedicineDetails />} />{" "}
         {/* Add route for medicine detail page */}
         <Route path="/Physiotherapist-Consultation" element={<ComingSoon />} />
         <Route path="/cart" element={<ComingSoon />} />
