@@ -75,9 +75,6 @@ const MedicineDetails = () => {
       <div className={classes.detailsContainer}>
         <h2>Augmentin Tablets Specification</h2>
         <p>
-          <strong>Requires Prescription (YES/NO):</strong> Yes
-        </p>
-        <p>
           <strong>Generics:</strong> Amoxicillin, Clavulanic Acid
         </p>
         <p>
