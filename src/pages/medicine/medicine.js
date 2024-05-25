@@ -21,11 +21,19 @@ const Medicine = () => {
         </Box>
       </Box>
       <Box className={classes.cardContainer}>
+        <Box display="flex" justifyContent="space-between">
+          <Box paddingLeft="30px">
+            <h2>Search Here for medicines</h2>
+          </Box>
+          <Box>
+            <h2>Shopping Cart details</h2>
+          </Box>
+        </Box>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
+            // alignItems: "center",
           }}
         >
           <StaticSearchBar />
@@ -58,4 +66,5 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "100px",
     color: theme.palette.common.white,
   },
+  iconCart: { color: theme.palette.primary.main },
 }));

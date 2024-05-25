@@ -39,6 +39,7 @@ import { Registration } from "../components/registration";
 import Medicine from "../pages/medicine/medicine";
 import ComingSoon from "../components/coming soon";
 import MedicineDetails from "../components/medicineDetails/medicineDetails"; // Import MedicineDetailPage component
+import ExercisePage from "../pages/exercise";
 
 const AppRoutes = () => {
   return (
@@ -53,7 +54,7 @@ const AppRoutes = () => {
         {/* Add route for medicine detail page */}
         <Route path="/Physiotherapist-Consultation" element={<ComingSoon />} />
         <Route path="/cart" element={<ComingSoon />} />
-        <Route path="/Exercises" element={<ComingSoon />} />
+        <Route path="/Exercises" element={<ExercisePage />} />
         <Route path="/Pose-detection" element={<ComingSoon />} />
         <Route path="/News" element={<ComingSoon />} />
       </Routes>
