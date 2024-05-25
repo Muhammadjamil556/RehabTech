@@ -135,6 +135,7 @@ export default function Header() {
             }}
             open={Boolean(anchorEl)}
             onClose={handleClose}
+            className={classes.menuContainer}
           >
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
@@ -162,9 +163,11 @@ export default function Header() {
           <Fade {...TransitionProps} timeout={350}>
             <Paper sx={{ width: 320, height: 380, marginTop: 1 }}>
               {isAuthenticated && (
-                <Box sx={{ display: "flex" }}>
+                <Box className={classes.notification} padding="0px 15px">
                   <Avatar alt={user.name} src={user.picture} />
-                  <Typography>{user.name} you have been log in</Typography>
+                  <p>
+                    <strong>{user.name} you have been log in</strong>
+                  </p>
                 </Box>
               )}
             </Paper>
@@ -213,6 +216,16 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  notification: {
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    "&:hover": {
+      transition: "all .25s ease",
+
+      boxShadow: "0 8px 8px -4px lightblue",
+    },
+  },
   imageBox: {
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
@@ -226,4 +239,5 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  menuContainer: { top: "50 !important" },
 }));
