@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
+import ExercisesDataMap from "../../components/exercise card/exercisesDataMap";
 
 const ExercisePage = () => {
   const classes = useStyles();
@@ -17,6 +18,10 @@ const ExercisePage = () => {
             </span>
           </p>
         </Box>
+      </Box>
+
+      <Box>
+        <ExercisesDataMap />
       </Box>
     </div>
   );
@@ -36,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: ".9",
     "&::before": {
       content: "''",
-      height: "80%",
+      height: "86%",
       width: "100%",
       position: "absolute",
       top: 94,
