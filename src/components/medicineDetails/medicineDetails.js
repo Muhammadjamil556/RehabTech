@@ -1,15 +1,30 @@
 //
 
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import backImage from "../../assets/e78bfb4b1e5c03e23238bcb45de6c008.jpg";
 import Radio from "@mui/material/Radio";
 import CustomButton from "../../units/buttons";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const MedicineDetails = () => {
+  const [loader, setLoader] = useState(false)
   const classes = useStyles();
+  const { id } = useParams()
+  const handleMedicineDetails = async () => {
+    const res = await axios.get(`https://rehabtech-backend.vercel.app/api/v1/all-medicines/` + id)
+    if (res) {
+      setLoader(true)
+    }
+  }
+  useEffect(() => {
+    handleMedicineDetails()
+  }, [id])
+
+  if (!loader) return <CircularProgress />
   return (
     <div className={classes.container}>
       <Box

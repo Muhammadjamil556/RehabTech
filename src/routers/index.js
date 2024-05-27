@@ -52,7 +52,7 @@ const AppRoutes = () => {
         {/* <Route path="/signup" element={<Registration />} /> */}
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/medicine-store" element={<Medicine />} />
-        <Route path="/MedicineDetails" element={<MedicineDetails />} />{" "}
+        <Route path="/MedicineDetails/:id" element={<MedicineDetails />} />{" "}
         {/* Add route for medicine detail page */}
         <Route path="/Physiotherapist-Consultation" element={<ComingSoon />} />
         <Route path="/cart" element={<ComingSoon />} />

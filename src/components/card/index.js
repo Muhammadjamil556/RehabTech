@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 export default function PropertiesCard({ id, name, imageURL, price }) {
   const classes = useStyles();
-
+  console.log(id, 'id')
   const clickToNotify = () => {
     addNotification({
       title: "shoping cart items updates",
@@ -74,12 +74,12 @@ export default function PropertiesCard({ id, name, imageURL, price }) {
             variant="contained"
             className="cartBtn"
             onClick={clickToNotify}
-            // onClick={() => handleNavigation(id)}
+          // onClick={() => handleNavigation(id)}
           >
             Add cart
             <AddShoppingCartIcon />
           </CustomButton>
-          <Link to="/MedicineDetails" className={classes.links}>
+          <Link to={`/MedicineDetails/${id}`} className={classes.links}>
             <CustomButton variant="contained" className="btn">
               Details
             </CustomButton>
