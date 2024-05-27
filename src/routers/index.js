@@ -49,8 +49,8 @@ const AppRoutes = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/signup" element={<Registration />} /> */}
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/medicine-store" element={<Medicine />} />
         <Route path="/MedicineDetails" element={<MedicineDetails />} />{" "}
         {/* Add route for medicine detail page */}
@@ -59,6 +59,8 @@ const AppRoutes = () => {
         <Route path="/Exercises" element={<ExercisePage />} />
         <Route path="/Pose-detection" element={<ComingSoon />} />
         <Route path="/News" element={<ExercisesDataMap />} />
+        <Route path="*" element={'No Page Found'} />
+
       </Routes>
       <Footer />
     </Router>

@@ -6,7 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Auth0Provider
@@ -17,6 +18,7 @@ root.render(
     }}
   >
     <Provider store={store}>
+      <ToastContainer />
       <App />
     </Provider>
   </Auth0Provider>
