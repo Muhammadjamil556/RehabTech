@@ -59,8 +59,7 @@ const AppRoutes = () => {
         <Route path="/Exercises" element={<ExercisePage />} />
         <Route path="/Pose-detection" element={<ComingSoon />} />
         <Route path="/News" element={<ExercisesDataMap />} />
-        <Route path="*" element={'No Page Found'} />
-
+        <Route path="*" element={"No Page Found"} />
       </Routes>
       <Footer />
     </Router>

@@ -11,20 +11,26 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const MedicineDetails = () => {
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
+  const [data, setData] = useState();
+  console.log(data, "res");
   const classes = useStyles();
-  const { id } = useParams()
+  const { id } = useParams();
   const handleMedicineDetails = async () => {
-    const res = await axios.get(`https://rehabtech-backend.vercel.app/api/v1/all-medicines/` + id)
+    const res = await axios.get(
+      `https://rehabtech-backend.vercel.app/api/v1/all-medicines/` + id
+    );
     if (res) {
-      setLoader(true)
+      setLoader(true);
+      setData(res.data.response);
     }
-  }
-  useEffect(() => {
-    handleMedicineDetails()
-  }, [id])
+  };
 
-  if (!loader) return <CircularProgress />
+  useEffect(() => {
+    handleMedicineDetails();
+  }, [id]);
+
+  if (!loader) return <CircularProgress />;
   return (
     <div className={classes.container}>
       <Box
@@ -38,16 +44,11 @@ const MedicineDetails = () => {
       <div className={classes.medicineContainer}>
         <Box className={classes.medicineImage}>
           <Box padding="30px" boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px">
-            <img
-              src="https://www.dvago.pk/_next/image?url=https%3A%2F%2Fdvago-assets.s3.ap-southeast-1.amazonaws.com%2FProductsImages%2F565%2F14787.webp&w=256&q=50"
-              alt="medicineimage"
-            />
+            <img src={data.imageURL} alt="medicineimage" />
           </Box>
         </Box>
         <div>
-          <h2>
-            Augmentin Tablets 625Mg (1 Box = 1 Strip)(1 Strip = 6 Tablets)
-          </h2>
+          <h2>{data.name}</h2>
 
           <p>
             <strong>Manufacturer:</strong> Glaxo SmithKline Pharmaceuticals Ltd
