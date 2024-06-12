@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+
 import ExercisesDataMap from "../../components/exercise card/exercisesDataMap";
 
 const ExercisePage = () => {

@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import ankleFootImage from "../../assets/ankle.jpg";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   imageContainer: {
     position: "relative",
     minHeight: "395px",
-    backgroundImage: `url(${ankleFootImage})`,
+
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -69,24 +68,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ExercisesListCard = ({ image, title, description }) => {
+const ExercisesListCard = ({ description, id, image, title }) => {
   const classes = useStyles();
   return (
     <div className={classes.card}>
       <div
         className={`${classes.imageContainer} ${classes.imageContainerHover}`}
+        style={{ backgroundImage: `url(${image})` }}
       >
         <div className={classes.overlay}>
           <div className={classes.overlayText}>VIEW EXERCISES</div>
         </div>
       </div>
       <div className={classes.cardContent}>
-        <h2 className={classes.cardTitle}>ANKLE & FOOT PAIN EXERCISES</h2>
-        <p className={classes.cardDescription}>
-          View exercises to relieve injuries and conditions affecting the ankle
-          and foot; including fractures, Achilles tendonitis, arthritis and
-          sprains.
-        </p>
+        <h2 className={classes.cardTitle}>{title}</h2>
+        <p className={classes.cardDescription}>{description}</p>
       </div>
     </div>
   );
