@@ -5,7 +5,7 @@ import { Typography, Avatar, Grid, Container, Paper } from "@mui/material";
 const useStyles = makeStyles(() => ({
   root: {
     padding: "4rem 0",
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f5f5",
     textAlign: "center",
   },
   header: {
