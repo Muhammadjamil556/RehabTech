@@ -10,6 +10,8 @@ import MedicineDetails from "../components/medicineDetails/medicineDetails"; // 
 import ExercisePage from "../pages/exercise";
 import ExercisesDataMap from "../components/exercise card/exercisesDataMap";
 import Appointment from "../components/appointment/appoinment";
+import Doctors from "../components/doctorList/doctorsMaped";
+import PatientDetails from "../components/patientDetails";
 
 const AppRoutes = () => {
   return (
@@ -20,11 +22,13 @@ const AppRoutes = () => {
         <Route path="/medicine-store" element={<Medicine />} />
         <Route path="/MedicineDetails/:id" element={<MedicineDetails />} />{" "}
         {/* Add route for medicine detail page */}
-        <Route path="/Physiotherapist-Consultation" element={<Appointment />} />
+        <Route path="/Appointment" element={<Appointment />} />
+        <Route path="/Physiotherapist-Consultation" element={<Doctors />} />
         <Route path="/cart" element={<ComingSoon />} />
         <Route path="/Exercises" element={<ExercisePage />} />
         <Route path="/Pose-detection" element={<ComingSoon />} />
         <Route path="/News" element={<ExercisesDataMap />} />
+        <Route path="/PatientDetails" element={<PatientDetails />} />
         <Route path="*" element={"No Page Found"} />
       </Routes>
       <Footer />

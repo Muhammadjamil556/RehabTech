@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import backImage from "../../assets/therapy.jpg";
+import Testimonials from "../../components/testimonial";
 
 const Home = () => {
   const classes = useStyles();
@@ -26,7 +27,9 @@ const Home = () => {
         </Box>
       </Box>
 
-      <Box></Box>
+      <Box>
+        <Testimonials />
+      </Box>
     </div>
   );
 };

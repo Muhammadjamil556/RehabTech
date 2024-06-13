@@ -17,6 +17,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,19 +32,27 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "1px solid #ccc",
   },
   avatar: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
+    height: "150px !important",
+    width: "150px !important",
+    borderRadius: "50%",
     marginBottom: theme.spacing(2),
   },
   calendarContainer: {
     padding: theme.spacing(2),
   },
   timesContainer: {
+    display: "flex",
+    flexWrap: "wrap",
     marginTop: theme.spacing(2),
+    gap: 2,
   },
   timeButton: {
-    width: "100%",
+    width: "30%",
     marginBottom: theme.spacing(1),
+    "&:hover": {
+      backgroundColor: "#e69500 !important",
+      color: "white",
+    },
   },
   timezoneContainer: {
     marginTop: theme.spacing(2),
@@ -56,8 +65,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Appointment() {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(dayjs("2021-06-16"));
   const [timezone, setTimezone] = useState("Asia/pakistan");
+
   const times = [
     "09:00 AM",
     "09:30 AM",
@@ -71,6 +82,9 @@ function Appointment() {
     "01:30 PM",
   ];
 
+  const handleButtonClick = () => {
+    navigate("/PatientDetails");
+  };
   return (
     <Container className={classes.root}>
       <Grid container spacing={4}>
@@ -78,7 +92,7 @@ function Appointment() {
           <Box className={classes.profileContainer}>
             <Avatar
               className={classes.avatar}
-              src="https://via.placeholder.com/150"
+              src="path/to/image.jpg"
               alt="Vikash Rathee"
             />
             <Typography variant="h6">Vikash Rathee</Typography>
@@ -117,29 +131,32 @@ function Appointment() {
                   key={time}
                   variant="outlined"
                   className={classes.timeButton}
+                  onClick={handleButtonClick}
                 >
                   {time}
                 </Button>
               ))}
             </Box>
-            <FormControl
-              variant="outlined"
-              fullWidth
-              className={classes.timezoneContainer}
-            >
-              <InputLabel id="timezone-label">Select Time Zone</InputLabel>
-              <Select
-                labelId="timezone-label"
-                value={timezone}
-                onChange={(e) => setTimezone(e.target.value)}
-                label="Select Time Zone"
+            <Box mt={2}>
+              <FormControl
+                variant="outlined"
+                fullWidth
+                className={classes.timezoneContainer}
               >
-                <MenuItem value="Asia/pakistan">
-                  Asia/pakistan (UTC+05:00)
-                </MenuItem>
-                {/* Add more time zones as needed */}
-              </Select>
-            </FormControl>
+                <InputLabel id="timezone-label">Select Time Zone</InputLabel>
+                <Select
+                  labelId="timezone-label"
+                  value={timezone}
+                  onChange={(e) => setTimezone(e.target.value)}
+                  label="Select Time Zone"
+                >
+                  <MenuItem value="Asia/pakistan">
+                    Pakistan Standard Time (PKT) (UTC+05:00)
+                  </MenuItem>
+                  {/* Add more time zones as needed */}
+                </Select>
+              </FormControl>
+            </Box>
           </Box>
         </Grid>
       </Grid>
