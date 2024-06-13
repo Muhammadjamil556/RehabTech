@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuContainer: {
-    top: "50 !important",
+    marginTop: 55,
   },
 }));
 
@@ -119,12 +119,30 @@ export default function Header() {
         returnTo: window.location.origin,
       },
     });
-    toast.success("Logout Successful");
+    toast.success("Logout Successful", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   };
 
   useEffect(() => {
     if (isAuthenticated) {
-      toast.success("Login Successful");
+      toast.success("Login Successful", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }, [isAuthenticated]);
 
@@ -241,10 +259,7 @@ export default function Header() {
           </Popper>
         </>
       ) : (
-        <CustomButton
-          variant="contained"
-          onClick={loginWithRedirect}
-        >
+        <CustomButton variant="contained" onClick={loginWithRedirect}>
           Log in
         </CustomButton>
       )}
