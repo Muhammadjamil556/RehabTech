@@ -169,6 +169,9 @@ export default function Header() {
         <Link to="/News" className={classes.links}>
           News
         </Link>
+        <Link to="/FeedbackReporting" className={classes.links}>
+          About us
+        </Link>
       </div>
       {isAuthenticated ? (
         <>

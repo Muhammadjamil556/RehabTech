@@ -12,6 +12,8 @@ import ExercisesDataMap from "../components/exercise card/exercisesDataMap";
 import Appointment from "../components/appointment/appoinment";
 import Doctors from "../components/doctorList/doctorsMaped";
 import PatientDetails from "../components/patientDetails";
+import CartPage from "../components/addCart/carts";
+import FeedbackReporting from "../pages/feeback and reporting";
 
 const AppRoutes = () => {
   return (
@@ -24,11 +26,12 @@ const AppRoutes = () => {
         {/* Add route for medicine detail page */}
         <Route path="/Appointment" element={<Appointment />} />
         <Route path="/Physiotherapist-Consultation" element={<Doctors />} />
-        <Route path="/cart" element={<ComingSoon />} />
         <Route path="/Exercises" element={<ExercisePage />} />
         <Route path="/Pose-detection" element={<ComingSoon />} />
         <Route path="/News" element={<ExercisesDataMap />} />
         <Route path="/PatientDetails" element={<PatientDetails />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/FeedbackReporting" element={<FeedbackReporting />} />
         <Route path="*" element={"No Page Found"} />
       </Routes>
       <Footer />
