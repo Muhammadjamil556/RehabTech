@@ -14,7 +14,6 @@ const ExercisesDataMap = () => {
         "https://rehabtech-backend.vercel.app/api/v1/all-exercise"
       );
       setData(res.data.response);
-      console.log(res.data.response, "dd");
     } catch (err) {
       setError("Failed to fetch data");
       console.error(err);

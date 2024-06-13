@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -72,14 +73,16 @@ const ExercisesListCard = ({ description, id, image, title }) => {
   const classes = useStyles();
   return (
     <div className={classes.card}>
-      <div
-        className={`${classes.imageContainer} ${classes.imageContainerHover}`}
-        style={{ backgroundImage: `url(${image})` }}
-      >
-        <div className={classes.overlay}>
-          <div className={classes.overlayText}>VIEW EXERCISES</div>
+      <Link to={`/ExercisesCatogory/${id}`}>
+        <div
+          className={`${classes.imageContainer} ${classes.imageContainerHover}`}
+          style={{ backgroundImage: `url(${image})` }}
+        >
+          <div className={classes.overlay}>
+            <div className={classes.overlayText}>VIEW EXERCISES</div>
+          </div>
         </div>
-      </div>
+      </Link>
       <div className={classes.cardContent}>
         <h2 className={classes.cardTitle}>{title}</h2>
         <p className={classes.cardDescription}>{description}</p>
