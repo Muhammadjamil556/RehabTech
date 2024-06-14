@@ -166,12 +166,23 @@ import addNotification from "react-push-notification";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../feature/productSlicer";
+import { toast } from "react-toastify";
 
 export default function PropertiesCard({ id, name, imageURL, price }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
+    toast.success("Added to cart sucessfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
     dispatch(addToCart({ id, name, imageURL, price }));
     addNotification({
       title: "Shopping cart items updates",
