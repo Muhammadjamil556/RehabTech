@@ -18,7 +18,11 @@ import {
   Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { removeItem, updateQuantity } from "../../feature/productSlicer";
+import {
+  removeFromCart,
+  selectCartItems,
+} from "../../toolkit/services/slices/product";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -71,9 +75,11 @@ const useStyles = makeStyles((theme) => ({
 
 const CartPage = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.product.cartItems);
+  const dispatch = useDispatch(); // Access dispatch
 
+  const navigate = useNavigate();
+  const cartItems = useSelector(selectCartItems);
+  console.log(cartItems, "cartItems");
   const [subtotal, setSubtotal] = useState(0);
   const [salesTax, setSalesTax] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
@@ -85,7 +91,6 @@ const CartPage = () => {
     );
     const newSalesTax = newSubtotal * 0.1;
     const newGrandTotal = newSubtotal + newSalesTax;
-    console.log(cartItems);
 
     setSubtotal(newSubtotal);
     setSalesTax(newSalesTax);
@@ -94,18 +99,21 @@ const CartPage = () => {
 
   const handleQuantityChange = (index, quantity) => {
     if (quantity > 0) {
-      dispatch(updateQuantity({ index, quantity }));
     }
   };
 
   const handleRemoveItem = (index) => {
-    dispatch(removeItem(index));
+    dispatch(removeFromCart(index));
   };
-
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      navigate("/Medicine-store");
+    }
+  }, [cartItems, navigate]);
   return (
     <Container className={classes.container}>
       <Typography variant="h4" gutterBottom>
-        Your Cart ({cartItems.length} items)
+        Your Cart ({cartItems?.length} items)
       </Typography>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
@@ -119,7 +127,7 @@ const CartPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {cartItems.map((item, index) => (
+            {cartItems?.map((item, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   <Box display="flex" alignItems="center">

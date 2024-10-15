@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import { AccountCircle, PowerSettingsNew } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme) => ({
   headerMain: {
@@ -91,10 +92,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
+  const user = useAuth();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState();
@@ -114,11 +116,9 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    logout({
-      logoutParams: {
-        returnTo: window.location.origin,
-      },
-    });
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+
     toast.success("Logout Successful", {
       position: "top-right",
       autoClose: 5000,
@@ -129,23 +129,10 @@ export default function Header() {
       progress: undefined,
       theme: "colored",
     });
+
+    window.location.reload();
   };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      toast.success("Login Successful", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
-  }, [isAuthenticated]);
-
+  if (!user) return <>loading...</>;
   return (
     <div className={classes.headerMain}>
       <div className={classes.imageBox}>
@@ -173,99 +160,93 @@ export default function Header() {
           About us
         </Link>
       </div>
-      {isAuthenticated ? (
-        <>
-          <Box>
-            <IconButton
-              onClick={handleNotificationsClick("top-end")}
-              size="large"
-              aria-label="show new notifications"
-              sx={{
-                width: "50px",
-                color: "white",
-              }}
-            >
-              <Badge badgeContent={1} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Box>
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenuClick}
-              color="inherit"
-            >
-              <Badge
-                overlap="circular"
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                badgeContent=" "
-              >
-                <Avatar alt={user.name} src={user.picture} />
-              </Badge>
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleCloseMenu}
-              className={classes.menuContainer}
-            >
-              <MenuItem onClick={handleCloseMenu}>
-                <ListItemIcon>
-                  <AccountCircle fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary={user.name} />
-              </MenuItem>
-              <MenuItem onClick={handleLogout}>
-                <ListItemIcon>
-                  <PowerSettingsNew fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary="Logout" />
-              </MenuItem>
-            </Menu>
-          </div>
-          <Popper
-            sx={{ zIndex: 1200 }}
-            open={open}
-            anchorEl={anchorElNotifications}
-            placement={placement}
-            transition
+      <>
+        <Box>
+          <IconButton
+            onClick={handleNotificationsClick("top-end")}
+            size="large"
+            aria-label="show new notifications"
+            sx={{
+              width: "50px",
+              color: "white",
+            }}
           >
-            {({ TransitionProps }) => (
-              <Fade {...TransitionProps} timeout={350}>
-                <Paper sx={{ width: 320, height: 380, marginTop: 1 }}>
-                  <Box className={classes.notification} padding="0px 15px">
-                    <Avatar alt={user.name} src={user.picture} />
-                    <p>
-                      <strong>{user.name}, you have logged in</strong>
-                    </p>
-                  </Box>
-                </Paper>
-              </Fade>
-            )}
-          </Popper>
-        </>
-      ) : (
-        <CustomButton variant="contained" onClick={loginWithRedirect}>
-          Log in
-        </CustomButton>
-      )}
+            <Badge badgeContent={1} color="error">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+        </Box>
+        <div>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenuClick}
+            color="inherit"
+          >
+            <Badge
+              overlap="circular"
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              badgeContent=" "
+            >
+              <Avatar alt={user.name} src={user.avatar} />
+            </Badge>
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleCloseMenu}
+            className={classes.menuContainer}
+          >
+            <MenuItem onClick={handleCloseMenu}>
+              <ListItemIcon>
+                <AccountCircle fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary={user.name} />
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <PowerSettingsNew fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </MenuItem>
+          </Menu>
+        </div>
+        <Popper
+          sx={{ zIndex: 1200 }}
+          open={open}
+          anchorEl={anchorElNotifications}
+          placement={placement}
+          transition
+        >
+          {({ TransitionProps }) => (
+            <Fade {...TransitionProps} timeout={350}>
+              <Paper sx={{ width: 320, height: 380, marginTop: 1 }}>
+                <Box className={classes.notification} padding="0px 15px">
+                  <Avatar alt={user.name} src={user.avatar} />
+                  <p>
+                    <strong>{user.name}, you have logged in</strong>
+                  </p>
+                </Box>
+              </Paper>
+            </Fade>
+          )}
+        </Popper>
+      </>
     </div>
   );
 }

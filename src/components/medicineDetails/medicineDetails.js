@@ -9,28 +9,15 @@ import CustomButton from "../../units/buttons";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useGetMedicineByIdQuery } from "../../toolkit/services/api/medicine-api";
 
 const MedicineDetails = () => {
-  const [loader, setLoader] = useState(false);
-  const [data, setData] = useState();
-  console.log(data, "res");
   const classes = useStyles();
   const { id } = useParams();
-  const handleMedicineDetails = async () => {
-    const res = await axios.get(
-      `https://rehabtech-backend.vercel.app/api/v1/all-medicines/` + id
-    );
-    if (res) {
-      setLoader(true);
-      setData(res.data.response);
-    }
-  };
+  const { data, isLoading, isError } = useGetMedicineByIdQuery(id);
 
-  useEffect(() => {
-    handleMedicineDetails();
-  }, [id]);
-
-  if (!loader) return <CircularProgress />;
+  if (isLoading) return <CircularProgress />;
+  if (isError) return <>Error happend</>;
   return (
     <div className={classes.container}>
       <Box
@@ -44,11 +31,11 @@ const MedicineDetails = () => {
       <div className={classes.medicineContainer}>
         <Box className={classes.medicineImage}>
           <Box padding="30px" boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px">
-            <img src={data.imageURL} alt="medicineimage" />
+            <img src={data?.response?.imageURL} alt="medicineimage" />
           </Box>
         </Box>
         <div>
-          <h2>{data.name}</h2>
+          <h2>{data?.response?.name}</h2>
 
           <p>
             <strong>Manufacturer:</strong> Glaxo SmithKline Pharmaceuticals Ltd
