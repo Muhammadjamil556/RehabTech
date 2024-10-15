@@ -7,7 +7,7 @@ const theme = createTheme({
       white: "#fff",
       blue: "#0061E0",
     },
-    primary: { main: "#174468", light: "#365B6D" },
+    primary: { main: "#1F2937", light: "#1F2937" },
     secondary: {
       main: "#5CC2BA",
       light: "#4998DA",
@@ -17,9 +17,9 @@ const theme = createTheme({
     background: {
       paper: "#FFFFFF",
       default: "#FFFFFF",
-      footer: "#004368",
+      footer: "#1F2937",
       main: "#424242",
-      gradient: "linear-gradient(195.23deg, #42C1BA -4.6%, #004368 112.09%)",
+      gradient: "linear-gradient(195.23deg, #42C1BA -4.6%, #1F2937 112.09%)",
     },
     text: {
       primary: "rgba(0, 67, 104, 0.6)",
