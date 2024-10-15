@@ -255,7 +255,7 @@ const SignUp = () => {
         </Typography>
 
         <Link
-          to="/login"
+          to="/signin"
           style={{ color: "red", textDecoration: "none", marginTop: 8 }}
         >
           <Typography variant="body2">
