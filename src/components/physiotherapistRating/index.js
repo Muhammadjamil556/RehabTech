@@ -64,8 +64,6 @@ const RatingPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Here you can submit the rating and feedback data to your backend or perform other actions
-    console.log("Rating:", rating);
-    console.log("Feedback:", feedback);
     // Reset the form
     setRating(0);
     setFeedback("");

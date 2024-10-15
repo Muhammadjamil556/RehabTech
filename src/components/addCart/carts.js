@@ -14,11 +14,17 @@ import {
   Button,
   Grid,
   IconButton,
-  TextField,
   Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { removeItem, updateQuantity } from "../../feature/productSlicer";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import {
+  removeFromCart,
+  selectCartItems,
+  updateCart,
+} from "../../toolkit/services/slices/product";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -43,28 +49,23 @@ const useStyles = makeStyles((theme) => ({
   itemName: {
     fontWeight: "bold",
   },
-  estimatedShipDate: {
-    color: "orange",
-  },
   itemPrice: {
     fontSize: "1rem",
   },
   deleteIcon: {
     color: "#000",
   },
-  textField: {
-    maxWidth: "100px",
-  },
-  couponCodeContainer: {
+  quantityContainer: {
     display: "flex",
-    justifyContent: "flex-end",
     alignItems: "center",
-    marginTop: "10px",
   },
-  couponCode: {
-    marginRight: "10px",
+  quantityButton: {
+    minWidth: "30px",
+    height: "30px",
   },
-  summaryContainer: {
+  totalContainer: {
+    fontWeight: "bold",
+    fontSize: "1.2rem",
     marginTop: "20px",
   },
 }));
@@ -72,35 +73,41 @@ const useStyles = makeStyles((theme) => ({
 const CartPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.product.cartItems);
-
-  const [subtotal, setSubtotal] = useState(0);
-  const [salesTax, setSalesTax] = useState(0);
+  const navigate = useNavigate();
+  const cartItems = useSelector(selectCartItems);
   const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
-    const newSubtotal = cartItems.reduce(
-      (sum, item) => sum + (item.price || 0) * item.quantity,
+    // Ensure the price is a number and handle default cases
+    const newGrandTotal = cartItems.reduce(
+      (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
       0
     );
-    const newSalesTax = newSubtotal * 0.1;
-    const newGrandTotal = newSubtotal + newSalesTax;
-    console.log(cartItems);
-
-    setSubtotal(newSubtotal);
-    setSalesTax(newSalesTax);
     setGrandTotal(newGrandTotal);
   }, [cartItems]);
 
-  const handleQuantityChange = (index, quantity) => {
-    if (quantity > 0) {
-      dispatch(updateQuantity({ index, quantity }));
+  const handleRemoveItem = (index) => {
+    dispatch(removeFromCart(index));
+  };
+  const handleQuantityChange = (index, increment) => {
+    const updatedItems = [...cartItems];
+    const currentItem = { ...updatedItems[index] }; // Create a new copy of the item
+
+    if (increment) {
+      currentItem.quantity = (currentItem.quantity || 0) + 1; // Increment the quantity
+    } else if (currentItem.quantity > 1) {
+      currentItem.quantity -= 1; // Decrement the quantity
     }
+
+    // Update the cart with the new quantity
+    dispatch(updateCart({ index, quantity: currentItem.quantity })); // Use the updateCart action
   };
 
-  const handleRemoveItem = (index) => {
-    dispatch(removeItem(index));
-  };
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      navigate("/Medicine-store");
+    }
+  }, [cartItems, navigate]);
 
   return (
     <Container className={classes.container}>
@@ -120,13 +127,15 @@ const CartPage = () => {
           </TableHead>
           <TableBody>
             {cartItems.map((item, index) => (
-              <TableRow key={index}>
+              <TableRow key={item.id}>
+                {" "}
+                {/* Use a unique id for key */}
                 <TableCell component="th" scope="row">
                   <Box display="flex" alignItems="center">
                     <Box>
                       <img
                         src={item.imageURL}
-                        alt="pic"
+                        alt={item.name} // use item.name for better accessibility
                         className={classes.image}
                       />
                     </Box>
@@ -134,40 +143,32 @@ const CartPage = () => {
                       <Typography className={classes.itemName}>
                         {item.name}
                       </Typography>
-                      {item.shipDate && (
-                        <Typography className={classes.estimatedShipDate}>
-                          (Estimated Ship Date: {item.shipDate})
-                        </Typography>
-                      )}
-                      {item.freeItems &&
-                        item.freeItems.map((freeItem, i) => (
-                          <Typography
-                            key={i}
-                            variant="body2"
-                            color="textSecondary"
-                          >
-                            {freeItem}
-                          </Typography>
-                        ))}{" "}
                     </Box>
                   </Box>
                 </TableCell>
                 <TableCell align="right" className={classes.itemPrice}>
-                  {(item.price || 0).toFixed(2)} PKR
+                  {item.price ? item.price.toFixed(2) : "0.00"} PKR
                 </TableCell>
                 <TableCell align="center">
-                  <TextField
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      handleQuantityChange(index, parseInt(e.target.value, 10))
-                    }
-                    className={classes.textField}
-                    InputProps={{ inputProps: { min: 1 } }}
-                  />
+                  <Box className={classes.quantityContainer}>
+                    <IconButton
+                      className={classes.quantityButton}
+                      onClick={() => handleQuantityChange(index, false)}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                    <Typography>{item.quantity || 1}</Typography>{" "}
+                    {/* Ensure quantity is displayed properly */}
+                    <IconButton
+                      className={classes.quantityButton}
+                      onClick={() => handleQuantityChange(index, true)}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </Box>
                 </TableCell>
                 <TableCell align="right">
-                  {((item.price || 0) * item.quantity).toFixed(2)} PKR
+                  {((item.price || 0) * (item.quantity || 1)).toFixed(2)} PKR
                 </TableCell>
                 <TableCell align="center">
                   <IconButton
@@ -179,41 +180,20 @@ const CartPage = () => {
                 </TableCell>
               </TableRow>
             ))}
-            <TableRow>
-              <TableCell rowSpan={3} />
-              <TableCell colSpan={2} className={classes.totalRow}>
-                Subtotal
-              </TableCell>
-              <TableCell align="right">{subtotal.toFixed(2)} PKR</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={2} className={classes.totalRow}>
-                Sales Tax
-              </TableCell>
-              <TableCell align="right">{salesTax.toFixed(2)} PKR</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell colSpan={2} className={classes.totalRow}>
-                Grand Total
-              </TableCell>
-              <TableCell align="right">{grandTotal.toFixed(2)} PKR</TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <Grid
-        container
-        justifyContent="space-between"
-        alignItems="center"
-        className={classes.summaryContainer}
-      >
-        <Typography variant="body1" className={classes.freeShippingText}>
-          Congrats, you're eligible for Free Shipping
+      <Grid container justifyContent="space-between" alignItems="center">
+        <Typography variant="h6" className={classes.totalContainer}>
+          Grand Total: {grandTotal.toFixed(2)} PKR
         </Typography>
         <Button variant="contained" className={classes.checkOutButton}>
           Check out
         </Button>
       </Grid>
+      <Typography variant="body1" className={classes.freeShippingText}>
+        Congrats, you're eligible for Free Shipping
+      </Typography>
     </Container>
   );
 };

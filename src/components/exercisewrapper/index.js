@@ -15,7 +15,6 @@ const ExercisePag = () => {
     const res = await axios.get(
       `https://rehabtech-backend.vercel.app/api/v1/all-exercise/` + id
     );
-    console.log(res, "dattttttaa");
     if (res) {
       setLoader(true);
       setData(res.data.response);
