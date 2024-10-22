@@ -16,10 +16,8 @@ const CardsMape = () => {
   const { data, isLoading, isError } = useGetAllMedicinesQuery();
   const classes = useStyles();
 
-  // State to hold the search query
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Handle the change in the TextField
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };

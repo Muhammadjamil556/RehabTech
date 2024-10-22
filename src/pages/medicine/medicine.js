@@ -17,12 +17,6 @@ const Medicine = () => {
         </Box>
       </Box>
       <Box className={classes.cardContainer}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        ></Box>
         <CardsMape />
       </Box>
     </div>
