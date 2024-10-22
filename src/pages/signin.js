@@ -81,7 +81,7 @@ const SignIn = () => {
         }}
       >
         <Typography variant="h4" style={{ color: "#fff", marginBottom: 16 }}>
-          Sign In
+          Sign In To Rehab Tech
         </Typography>
         <Typography style={{ color: "#aaa", marginBottom: 16 }}>
           Fill in the fields below to sign in

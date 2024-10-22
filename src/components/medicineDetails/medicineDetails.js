@@ -2,12 +2,11 @@
 
 import { Box, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import backImage from "../../assets/e78bfb4b1e5c03e23238bcb45de6c008.jpg";
 import Radio from "@mui/material/Radio";
 import CustomButton from "../../units/buttons";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useGetMedicineByIdQuery } from "../../toolkit/services/api/medicine-api";
 
@@ -18,6 +17,7 @@ const MedicineDetails = () => {
 
   if (isLoading) return <CircularProgress />;
   if (isError) return <>Error happend</>;
+
   return (
     <div className={classes.container}>
       <Box
@@ -38,7 +38,7 @@ const MedicineDetails = () => {
           <h2>{data?.response?.name}</h2>
 
           <p>
-            <strong>Manufacturer:</strong> Glaxo SmithKline Pharmaceuticals Ltd
+            <strong>Manufacturer:</strong> {data?.response?.manufacturer}
           </p>
           <Box
             display="flex"
@@ -52,7 +52,7 @@ const MedicineDetails = () => {
             </Box>
 
             <p>
-              <strong>Price:</strong> 300pkr
+              <strong>Price:</strong> {data?.response?.price}
             </p>
           </Box>
           <Box
@@ -63,7 +63,7 @@ const MedicineDetails = () => {
           >
             <Box>
               <p>
-                <strong>Composition:</strong> amoxicillin/clavulanate
+                <strong>Composition:</strong> {data?.response?.composition}
               </p>
             </Box>
 
@@ -76,54 +76,20 @@ const MedicineDetails = () => {
       </div>
 
       <div className={classes.detailsContainer}>
-        <h2>Augmentin Tablets Specification</h2>
+        <h2>{data?.response?.name} Specification</h2>
         <p>
-          <strong>Generics:</strong> Amoxicillin, Clavulanic Acid
+          <strong>Generics:</strong> {data?.response?.composition}
         </p>
         <p>
-          <strong>Used For:</strong> Bacterial Infection
-        </p>
-        <p>
-          <strong>How it works:</strong> The beta-lactamase inhibitory action of
-          clavulanate extends the spectrum of amoxicillin to embrace a wider
-          range of organisms, including many resistant to other beta-lactam
-          antibiotics.
+          <strong>Used For:</strong> {data?.response?.uses}
         </p>
 
-        <h2>Augmentin Tablets Usage And Safety</h2>
+        <h2>{data?.response?.name} Usage And Safety</h2>
         <p>
-          <strong>Dosage:</strong> Amoxicillin, Clavulanic Acid
+          <strong>Dosage:</strong> {data?.response?.composition}
         </p>
         <p>
-          <strong>Side Effects:</strong> Mucocutaneous candidiasis, reversible
-          leucopenia (including neutropenia) and thrombocytopenia, angioneurotic
-          oedema, anaphylaxis, serum sickness-like syndrome, hypersensitivity
-          vasculitis, dizziness, headache, diarrhoea, nausea, vomiting,
-          indigestion.
-        </p>
-        <p>
-          <strong>Drug Interactions:</strong> Mycophenolate mofetil, Probenecid,
-          Oral contraceptives, acenocoumarol or warfarin.
-        </p>
-
-        <h2>Indication</h2>
-        <p>
-          It is an antibiotic agent with a notably broad spectrum of activity
-          against the commonly occurring bacterial pathogens.
-        </p>
-
-        <h2>When not to Use</h2>
-        <p>
-          It is contraindicated in patients with a history of hypersensitivity
-          to beta-lactams, e.g. penicillins and cephalosporins.
-        </p>
-
-        <h2>Augmentin Tablets Precautions</h2>
-        <p>
-          <strong>Precaution:</strong> Before initiating therapy with
-          Co-Amoxiclav, careful enquiry should be made concerning previous
-          hypersensitivity reactions to penicillins, cephalosporins, or other
-          allergens.
+          <strong>Side Effects:</strong> {data?.response?.sideEffects}
         </p>
       </div>
     </div>
