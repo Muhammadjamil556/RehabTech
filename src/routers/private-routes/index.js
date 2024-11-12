@@ -6,15 +6,16 @@ import Home from "../../pages/home";
 
 import Medicine from "../../pages/medicine/medicine";
 import ComingSoon from "../../components/coming soon";
-import MedicineDetails from "../../components/medicineDetails/medicineDetails"; // Import MedicineDetailPage component
+import MedicineDetails from "../../components/medicineDetails/medicineDetails";
 import ExercisePage from "../../pages/exercise";
-import ExercisesDataMap from "../../components/exercise card/exercisesDataMap";
+
 import Appointment from "../../components/appointment/appoinment";
 import Doctors from "../../components/doctorList/doctorsMaped";
 import PatientDetails from "../../components/patientDetails";
 import CartPage from "../../components/addCart/carts";
 import FeedbackReporting from "../../pages/feeback and reporting";
 import ExercisePag from "../../components/exercisewrapper";
+import InteractiveHealthBlog from "../../pages/blogs";
 const PrivateRoutes = () => {
   return (
     <Router>
@@ -29,7 +30,7 @@ const PrivateRoutes = () => {
         <Route path="/Exercises" element={<ExercisePage />} />
         <Route path="/ExercisesCatogory/:id" element={<ExercisePag />} />
         <Route path="/Pose-detection" element={<ComingSoon />} />
-        <Route path="/News" element={<ExercisesDataMap />} />
+        <Route path="/News" element={<InteractiveHealthBlog />} />
         <Route path="/PatientDetails" element={<PatientDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/FeedbackReporting" element={<FeedbackReporting />} />
