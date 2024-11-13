@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "../../pages/signin";
 import SignUp from "../../pages/signup";
+import PasswordResetPage from "../../pages/PasswordResetPage";
 
 const PublicRoutes = () => {
   return (
@@ -12,7 +13,7 @@ const PublicRoutes = () => {
         ))}
 
         <Route path={"/signup"} exact element={<SignUp />} />
-
+        <Route path="/password-reset/:token" element={<PasswordResetPage />} />
         <Route path="*" element={<div>No Page Found</div>} />
       </Routes>
     </Router>

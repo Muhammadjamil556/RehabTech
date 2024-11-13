@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  TextField,
-  Typography,
-  Avatar,
-  CircularProgress,
-} from "@mui/material";
+import { Button, TextField, Typography, CircularProgress } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,6 +11,7 @@ const SignIn = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -59,6 +54,21 @@ const SignIn = () => {
       );
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!form.email) {
+      toast.error("Please enter your email.");
+      return;
+    }
+    try {
+      await axios.post("http://localhost:8000/api/v1/forgot-password", {
+        email: form.email,
+      });
+      toast.success("Password reset link sent to your email.");
+    } catch (err) {
+      toast.error("Failed to send reset link. Please try again.");
     }
   };
 
@@ -108,23 +118,25 @@ const SignIn = () => {
               style: { color: "#fff" },
             }}
           />
-          <TextField
-            id="password"
-            name="password"
-            label="Password"
-            type="password"
-            value={form.password}
-            onChange={handleInputChange}
-            variant="outlined"
-            fullWidth
-            required
-            InputLabelProps={{
-              style: { color: "#fff" },
-            }}
-            InputProps={{
-              style: { color: "#fff" },
-            }}
-          />
+          {!isForgotPassword && (
+            <TextField
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              value={form.password}
+              onChange={handleInputChange}
+              variant="outlined"
+              fullWidth
+              required
+              InputLabelProps={{
+                style: { color: "#fff" },
+              }}
+              InputProps={{
+                style: { color: "#fff" },
+              }}
+            />
+          )}
 
           <Button
             type="submit"
@@ -161,8 +173,43 @@ const SignIn = () => {
             Don't have an account? Sign Up
           </Typography>
         </Link>
+
+        <button
+          style={{ marginTop: 16 }}
+          onClick={() => setIsForgotPassword(true)}
+        >
+          Forget Password
+        </button>
+
+        {isForgotPassword && (
+          <div>
+            <Typography style={{ color: "#fff", marginTop: 16 }}>
+              Enter your email to reset your password
+            </Typography>
+            <TextField
+              id="forgot-email"
+              name="email"
+              label="Email"
+              type="email"
+              value={form.email}
+              onChange={handleInputChange}
+              variant="outlined"
+              fullWidth
+            />
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={handleForgotPassword}
+              style={{ marginTop: 16 }}
+            >
+              Send Reset Link
+            </Button>
+          </div>
+        )}
+
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 };
