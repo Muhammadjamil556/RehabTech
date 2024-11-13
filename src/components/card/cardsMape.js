@@ -11,12 +11,18 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useSelector } from "react-redux";
+import { selectCartItems } from "../../toolkit/services/slices/product";
+import { useNavigate } from "react-router-dom";
 
 const CardsMape = () => {
   const { data, isLoading, isError } = useGetAllMedicinesQuery();
   const classes = useStyles();
 
+  const navigate = useNavigate();
+
   const [searchQuery, setSearchQuery] = useState("");
+  const cartItems = useSelector(selectCartItems);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -58,12 +64,14 @@ const CardsMape = () => {
         <Box paddingLeft="30px">
           <h2>Search Here for Medicines</h2>
         </Box>
-        <Box display={"flex"} alignItems={"center"} gap={2}>
-          <Badge badgeContent={3}>
-            <ShoppingCartIcon fontSize="large" className={classes.iconCart} />
-          </Badge>
-          <h2>Shopping Cart Details</h2>
-        </Box>
+        <div onClick={() => navigate("/cart")}>
+          <Box display={"flex"} alignItems={"center"} gap={2}>
+            <Badge badgeContent={cartItems.length}>
+              <ShoppingCartIcon fontSize="large" className={classes.iconCart} />
+            </Badge>
+            <h2>Shopping Cart Details</h2>
+          </Box>
+        </div>
       </Box>
       <div className={classes.container}>
         {filteredMedicines.map((item, index) => (
