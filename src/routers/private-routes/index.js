@@ -16,6 +16,9 @@ import CartPage from "../../components/addCart/carts";
 import FeedbackReporting from "../../pages/feeback and reporting";
 import ExercisePag from "../../components/exercisewrapper";
 import InteractiveHealthBlog from "../../pages/blogs";
+import CheckoutForm from "../../pages/CheckoutForm";
+import PaymentSuccess from "../../components/success";
+import BlogPostDetail from "../../components/blogsDetails";
 const PrivateRoutes = () => {
   return (
     <Router>
@@ -31,10 +34,13 @@ const PrivateRoutes = () => {
         <Route path="/ExercisesCatogory/:id" element={<ExercisePag />} />
         <Route path="/Pose-detection" element={<ComingSoon />} />
         <Route path="/News" element={<InteractiveHealthBlog />} />
+        <Route path="/post/:id" element={<BlogPostDetail />} />
         <Route path="/PatientDetails" element={<PatientDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/FeedbackReporting" element={<FeedbackReporting />} />
+        <Route path="/payment" element={<CheckoutForm />} />
         <Route path="*" element={"No Page Found"} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
       <Footer />
     </Router>

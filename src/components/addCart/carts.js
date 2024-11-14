@@ -24,7 +24,7 @@ import {
   selectCartItems,
   updateCart,
 } from "../../toolkit/services/slices/product";
-import { useNavigate } from "react-router-dom";
+import { navigate, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -86,6 +86,9 @@ const CartPage = () => {
     setGrandTotal(newGrandTotal);
   }, [cartItems]);
 
+  const handleClick = () => {
+    navigate("/payment", { state: { cartItems } });
+  };
   const handleRemoveItem = (index) => {
     dispatch(removeFromCart(index));
   };
@@ -187,7 +190,11 @@ const CartPage = () => {
         <Typography variant="h6" className={classes.totalContainer}>
           Grand Total: {grandTotal.toFixed(2)} PKR
         </Typography>
-        <Button variant="contained" className={classes.checkOutButton}>
+        <Button
+          variant="contained"
+          className={classes.checkOutButton}
+          onClick={handleClick}
+        >
           Check out
         </Button>
       </Grid>

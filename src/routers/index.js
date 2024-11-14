@@ -1,7 +1,7 @@
 import React from "react";
 import PublicRoutes from "./public-routes";
 import PrivateRoutes from "./private-routes";
-import CheckoutForm from "../pages/CheckoutForm";
+// import CheckoutForm from "../pages/CheckoutForm";
 
 const AppRouting = () => {
   const user = localStorage.getItem("user");
@@ -10,7 +10,7 @@ const AppRouting = () => {
   // Show private routes if user and token are present, otherwise show public routes
   return (
     <div>
-      <CheckoutForm />
+      {/* <CheckoutForm /> */}
       {user && token ? <PrivateRoutes /> : <PublicRoutes />}
     </div>
   );
