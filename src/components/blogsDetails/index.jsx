@@ -45,11 +45,11 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(8),
   },
   authorName: {
-    fontSize: "1.1rem",
+    fontSize: "0.9rem !important",
     fontWeight: "bold",
   },
   authorDate: {
-    fontSize: "0.9rem",
+    fontSize: "0.7rem !important",
   },
   image: {
     width: "100%",

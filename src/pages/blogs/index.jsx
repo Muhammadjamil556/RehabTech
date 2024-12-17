@@ -587,10 +587,11 @@ export const blogPosts = [
     introduction: `
       Exoskeleton technology is becoming a groundbreaking tool in the field of physical therapy. By enhancing mobility 
       and muscle reconditioning, these suits provide support for patients recovering from significant physical injuries. 
-      Exoskeletons are now being used in clinics worldwide to help restore functional movements.`,
+      
+       Exoskeletons are now being used in clinics worldwide to help restore functional movements.`,
     content: `
       Exoskeletons work by mimicking natural movements and providing support where muscles or joints are weak, thus allowing 
-      patients to perform exercises they might not be able to otherwise. Clinical trials have shown that these devices 
+      patients to perform exercises they might not be able to otherwise.</br> Clinical trials have shown that these devices 
       improve recovery times and provide patients with a greater sense of independence.`,
     keyTakeaways: [
       "Exoskeletons offer stability and support for patients with limited mobility.",
